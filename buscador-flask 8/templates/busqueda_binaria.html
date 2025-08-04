@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}Búsqueda Binaria{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold mb-0"><i class="bi bi-tree"></i> Búsqueda Binaria</h2>
+    <a href="{{ url_for('index') }}" class="btn btn-outline-success"><i class="bi bi-house-door"></i> Inicio</a>
+</div>
+<form method="POST">
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-search"></i></span>
+                <input type="text" class="form-control" name="buscado" placeholder="Buscar Elemento" value="{{ buscado }}">
+                <button class="btn btn-green" type="submit"><i class="bi bi-search"></i> Buscar</button>
+                <button class="btn btn-secondary" type="submit" name="generar"><i class="bi bi-shuffle"></i> Generar Nuevos Datos</button>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="row g-3">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header fw-bold"><i class="bi bi-list-ol"></i> Lista Ordenada</div>
+            <div class="card-body p-0">
+                <table class="table table-bordered mb-0">
+                    <thead>
+                        <tr>
+                            <th>Índice</th>
+                            <th>Valor</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for val in lista %}
+                            {% set idx = loop.index0 %}
+                            {% set estado_actual = pasos[idx] %}
+                            <tr class="{% if estado_actual == 'encontrado' %}bg-found{% elif estado_actual == 'revisado' %}bg-checked{% endif %}">
+                                <td>{{ idx }}</td>
+                                <td>{{ val }}</td>
+                                <td>
+                                    {% if estado_actual == 'encontrado' %}
+                                        <span class="badge badge-found">¡Encontrado!</span>
+                                    {% elif estado_actual == 'revisado' %}
+                                        <span class="badge badge-revisado">Revisado</span>
+                                    {% else %}
+                                        <span class="badge badge-no">No revisado</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card mb-3">
+            <div class="card-header fw-bold"><i class="bi bi-info-circle"></i> Resultados</div>
+            <div class="card-body">
+                {% if resultado is not none %}
+                    {% if resultado >= 0 %}
+                        <div class="alert alert-success mb-0">
+                            <i class="bi bi-check-circle"></i> ¡Elemento encontrado!<br>
+                            <b>Posición:</b> {{ resultado }}<br>
+                            <b>Valor:</b> {{ lista[resultado] }}
+                        </div>
+                    {% else %}
+                        <div class="alert alert-danger mb-0">
+                            <i class="bi bi-x-circle"></i> No encontrado.
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <span class="text-muted">Realiza una búsqueda...</span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

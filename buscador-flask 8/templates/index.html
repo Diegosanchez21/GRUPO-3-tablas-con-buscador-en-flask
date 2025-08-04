@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Algoritmos de Búsqueda{% endblock %}
+{% block content %}
+<div class="text-center py-4">
+    <div class="main-title mb-2">
+        <i class="bi bi-search"></i> Algoritmos de Búsqueda
+    </div>
+    <p class="fs-5 mb-5">Explora y visualiza algoritmos de búsqueda secuencial y binaria</p>
+    <div class="row justify-content-center">
+        <div class="col-md-4 mb-4">
+            <div class="card card-link p-4 h-100">
+                <div class="text-primary text-center mb-2"><i class="bi bi-list-ul icon-big"></i></div>
+                <h4 class="fw-bold text-center">Búsqueda Secuencial</h4>
+                <p class="text-center">Recorre la lista elemento por elemento hasta encontrar el valor buscado. Complejidad: O(n)</p>
+                <div class="d-grid">
+                    <a href="{{ url_for('busqueda_secuencial_view') }}" class="btn btn-blue btn-lg">
+                        <i class="bi bi-play-fill"></i> Probar Búsqueda Secuencial
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card card-link p-4 h-100">
+                <div class="text-success text-center mb-2"><i class="bi bi-tree icon-big"></i></div>
+                <h4 class="fw-bold text-center">Búsqueda Binaria</h4>
+                <p class="text-center">Divide la lista por la mitad en cada iteración. Requiere lista ordenada.<br>Complejidad: O(log n)</p>
+                <div class="d-grid">
+                    <a href="{{ url_for('busqueda_binaria_view') }}" class="btn btn-green btn-lg">
+                        <i class="bi bi-play-fill"></i> Probar Búsqueda Binaria
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
